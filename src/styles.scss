@@ -1,1 +1,61 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+:root {
+  --black: #171321;
+  --dkblue: #0d314b;
+  --plum: #4b0d49;
+  --hotmag: #ff17e4;
+  --magenta: #e310cb;
+  --aqua: #86fbfb;
+  --white: #f7f8fa;
+  --grey: #8a8a8a;
+  --button: #8064a2;
+  --errorRed: red;
+  --font-size: 1.3rem;
+  --silk: "Silkscreen", sans-serif;
+}
+
+html {
+  box-sizing: border-box;
+  height: 100%;
+}
+*
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: var(--silk);
+  background-color: var(--black);
+  color: var(--white);
+  font-size: var(--font-size);
+  height: 100%;
+}
+
+ngx-snake {
+  ngx-snake-tile {
+    background: var(--white);
+    &.free {
+      div {
+        background: var(--white);
+      }
+    }
+    &.head,
+    &.tail,
+    &.body {
+      div {
+        background: var(--aqua);
+      }
+    }
+    &.food {
+      div {
+        background: var(--magenta);
+      }
+    }
+  }
+}

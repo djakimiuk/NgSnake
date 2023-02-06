@@ -1,14 +1,23 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgxSnakeModule } from 'ngx-snake';
 
 import { AppComponent } from './app.component';
+import { FormComponent } from './form/form.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SnakeComponent } from './snake/snake.component';
+import { FormsModule } from '@angular/forms';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FormComponent,
+    SnakeComponent,
+    NavbarComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule, NgxSnakeModule, NgbModule, FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
