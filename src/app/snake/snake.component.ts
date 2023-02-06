@@ -31,6 +31,8 @@ export class SnakeComponent implements OnInit {
   public onLeftButtonPressed() {
     this._snake.actionLeft();
   }
+  
+
   constructor() {}
 
   ngOnInit(): void {}

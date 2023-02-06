@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 export interface NameAndEmail {
   name: string;
@@ -15,6 +15,7 @@ export class FormComponent implements OnInit {
   public email = '';
   public nameAlertVisibility = true;
   public emailAlertVisibility = true;
+  @Output() public start = new EventEmitter<boolean>();
 
   constructor() {}
   ngOnInit(): void {}
@@ -26,6 +27,7 @@ export class FormComponent implements OnInit {
       this.nameAlertVisibility = false;
     } else {
       this.nameAlertVisibility = true;
+      this.start.emit(true);
     }
   }
 

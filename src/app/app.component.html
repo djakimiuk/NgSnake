@@ -1,4 +1,3 @@
-
-    <app-navbar></app-navbar>
-    <app-form></app-form>
-    <app-snake></app-snake>
+<app-navbar></app-navbar>
+<app-form (start)="onStartClicked($event)" [hidden]="formVisibility"></app-form>
+<app-snake [hidden]="!formVisibility"></app-snake>

@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'Zaliczenie';
+  title = 'NG SNAKE';
+  public formVisibility = false;
+  public onStartClicked(event: boolean) {
+    this.formVisibility = event;
+  }
 }
