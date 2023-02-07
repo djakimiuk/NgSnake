@@ -1,3 +1,3 @@
 <app-navbar></app-navbar>
-<app-form (start)="onStartClicked($event)" [hidden]="formVisibility"></app-form>
-<app-snake [hidden]="!formVisibility"></app-snake>
+<app-form (start)="onStartClicked($event)" [hidden]="!formVisibility" ></app-form>
+<app-snake (exit)="onExitClicked($event)" [currentPlayer] ='playerName' [hidden]="formVisibility"></app-snake>

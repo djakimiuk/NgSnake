@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { NameEmailAndVisibility } from './form/form.component';
+export interface NameAndEmail {
+  name: string;
+  email: string;
+}
 
 @Component({
   selector: 'app-root',
@@ -7,8 +12,21 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'NG SNAKE';
-  public formVisibility = false;
-  public onStartClicked(event: boolean) {
+  public formVisibility = true;
+  public playerName: string = '';
+  public playersArray: Array<NameAndEmail> = [];
+
+  public onStartClicked(event: NameEmailAndVisibility) {
+    this.formVisibility = event.visibility;
+    this.playersArray.push({
+      name: event.name,
+      email: event.email,
+    });
+    this.playersArray = [...this.playersArray];
+    this.playerName = event.name;
+  }
+
+  public onExitClicked(event: boolean) {
     this.formVisibility = event;
   }
 }

@@ -1,8 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
-export interface NameAndEmail {
+export interface NameEmailAndVisibility {
   name: string;
   email: string;
+  visibility: boolean;
 }
 
 @Component({
@@ -15,7 +16,7 @@ export class FormComponent implements OnInit {
   public email = '';
   public nameAlertVisibility = true;
   public emailAlertVisibility = true;
-  @Output() public start = new EventEmitter<boolean>();
+  @Output() public start = new EventEmitter<NameEmailAndVisibility>();
 
   constructor() {}
   ngOnInit(): void {}
@@ -27,7 +28,6 @@ export class FormComponent implements OnInit {
       this.nameAlertVisibility = false;
     } else {
       this.nameAlertVisibility = true;
-      this.start.emit(true);
     }
   }
 
@@ -36,8 +36,15 @@ export class FormComponent implements OnInit {
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (!this.email.match(validEmailRegex)) {
       this.emailAlertVisibility = false;
-    } else {
+    } else if (this.email.match(validEmailRegex) && this.nameAlertVisibility) {
       this.emailAlertVisibility = true;
+      this.start.emit({
+        name: this.name,
+        email: this.email,
+        visibility: false,
+      });
+      this.name = '';
+      this.email = '';
     }
   }
 }

@@ -13,13 +13,14 @@
     margin: 0.5em
 }
 
-h1 {
+#welcome h1 {
   color: var(--magenta);
   font-size: 2.5em;
 }
 
-h1 span {
+#score h1 {
   color: var(--aqua);
+  font-size: 1.5em;
 }
 
 #grid {
