@@ -33,7 +33,7 @@ export class FormComponent implements OnInit {
 
   public emailValidation() {
     const validEmailRegex =
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!this.email.match(validEmailRegex)) {
       this.emailAlertVisibility = false;
     } else if (this.email.match(validEmailRegex) && this.nameAlertVisibility) {

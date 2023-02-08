@@ -16,17 +16,22 @@ import { NgxSnakeComponent } from 'ngx-snake';
 export class SnakeComponent implements OnInit {
   @Input() public currentPlayer: string = '';
   public score: number = 0;
-  public timerValue: number = 0;
+  public timer: number = 0;
   public timerInterval: any;
   @Output() exit = new EventEmitter<boolean>();
+  @Output() scoreValue = new EventEmitter<number>();
+  @Output() timerValue = new EventEmitter<number>();
+  @Output() gameStatus = new EventEmitter<string>();
 
   public scoreIncrement() {
     this.score++;
+    this.scoreValue.emit(this.score);
   }
 
   public fatality() {
-    this.timerValue = this.timerValue;
+    this.timer = this.timer;
     clearInterval(this.timerInterval);
+    this.gameStatus.emit('WASTED');
   }
 
   public exitGame() {
@@ -38,19 +43,26 @@ export class SnakeComponent implements OnInit {
 
   public onStartButtonPressed() {
     this._snake.actionStart();
+    this.gameStatus.emit('STARTED');
     this.timerInterval = setInterval(() => {
-      this.timerValue++;
+      this.timer++;
+      this.timerValue.emit(this.timer);
     }, 1000);
   }
   public onStopButtonPressed() {
     this._snake.actionStop();
-    this.timerValue = this.timerValue;
+    this.timer = this.timer;
     clearInterval(this.timerInterval);
+    this.timerValue.emit(this.timer);
+    this.gameStatus.emit('PAUSED');
   }
   public onResetButtonPressed() {
     this.score = 0;
     clearInterval(this.timerInterval);
-    this.timerValue = 0;
+    this.timer = 0;
+    this.timerValue.emit(this.timer);
+    this.scoreValue.emit(this.score);
+    this.gameStatus.emit('READY');
     this._snake.actionReset();
   }
   public onUpButtonPressed() {

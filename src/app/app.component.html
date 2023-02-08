@@ -1,3 +1,18 @@
-<app-navbar [scoreVisibility]="formVisibility"></app-navbar>
-<app-form (start)="onStartClicked($event)" [hidden]="!formVisibility" ></app-form>
-<app-snake (exit)="onExitClicked($event)" [currentPlayer] ='playerName' [hidden]="formVisibility"></app-snake>
+<app-navbar
+  [score]="score"
+  [timer]="timer"
+  [scoreVisibility]="formVisibility"
+  [gameStatus]="gameStatus"
+></app-navbar>
+<app-form
+  (start)="onStartClicked($event)"
+  [hidden]="!formVisibility"
+></app-form>
+<app-snake
+  (exit)="onExitClicked($event)"
+  (scoreValue)="onScoreChange($event)"
+  (timerValue)="onTimerChange($event)"
+  (gameStatus)="onStatusChange($event)"
+  [currentPlayer]="playerName"
+  [hidden]="formVisibility"
+></app-snake>

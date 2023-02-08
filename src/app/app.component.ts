@@ -14,6 +14,9 @@ export class AppComponent {
   title = 'NG SNAKE';
   public formVisibility = true;
   public playerName: string = '';
+  public score: number = 0;
+  public timer: number = 0;
+  public gameStatus: string = 'READY';
   public playersArray: Array<NameAndEmail> = [];
 
   public onStartClicked(event: NameEmailAndVisibility) {
@@ -28,5 +31,14 @@ export class AppComponent {
 
   public onExitClicked(event: boolean) {
     this.formVisibility = event;
+  }
+  public onScoreChange(event: number) {
+    this.score = event;
+  }
+  public onTimerChange(event: number) {
+    this.timer = event;
+  }
+  public onStatusChange(event: string) {
+    this.gameStatus = event;
   }
 }
