@@ -8,13 +8,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SnakeComponent } from './snake/snake.component';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
+import { HistoryComponent } from './history/history.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormComponent,
     SnakeComponent,
-    NavbarComponent
+    NavbarComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule, NgxSnakeModule, NgbModule, FormsModule
