@@ -22,10 +22,8 @@ import { SortPipe } from './sort.pipe';
     FilterPipe,
     SortPipe,
   ],
-  imports: [
-    BrowserModule, NgxSnakeModule, NgbModule, FormsModule
-  ],
+  imports: [BrowserModule, NgxSnakeModule, NgbModule, FormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
