@@ -12,6 +12,7 @@ export class HistoryComponent implements OnInit {
   @Input() playersArray: Array<NameAndEmail> = [];
   public filterActionValue: string = 'all';
   public filterDirectionValue: string = 'asc';
+
   public uniqueActions = [
     'Game History Button',
     'Start Game Button',
@@ -25,5 +26,7 @@ export class HistoryComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.filterDirectionValue);
+  }
 }

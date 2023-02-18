@@ -10,9 +10,9 @@ export class SortPipe implements PipeTransform {
       return value;
     }
     if (sortBy === 'asc') {
-      return value.sort();
+      return value.sort((a, b) => a.time - b.time);
     } else {
-      value.sort();
+      value.sort((a, b) => a.time - b.time);
       return value.reverse();
     }
   }
