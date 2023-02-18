@@ -2,7 +2,10 @@
   <h1>Welcome to <span>NG SNAKE</span></h1>
 </div>
 <div class="container text-center" id="container">
-  <form #registrationForm="ngForm" (submit)="formSubmit(registrationForm.form.value)">
+  <form
+    #registrationForm="ngForm"
+    (submit)="formSubmit(registrationForm.form.value); registrationForm.reset()"
+  >
     <div class="form-group">
       <label for="exampleFormControlInput1">Player name</label>
       <input
