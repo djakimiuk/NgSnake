@@ -9,6 +9,8 @@ import { SnakeComponent } from './snake/snake.component';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HistoryComponent } from './history/history.component';
+import { FilterPipe } from './filter.pipe';
+import { SortPipe } from './sort.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { HistoryComponent } from './history/history.component';
     FormComponent,
     SnakeComponent,
     NavbarComponent,
-    HistoryComponent
+    HistoryComponent,
+    FilterPipe,
+    SortPipe,
   ],
   imports: [
     BrowserModule, NgxSnakeModule, NgbModule, FormsModule

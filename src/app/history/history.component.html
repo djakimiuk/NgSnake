@@ -1,1 +1,44 @@
-<p>history works!</p>
+<div class="container text-center" id="welcome">
+  <h1>
+    <span>{{ playersArray[playersArray.length - 1].name }}'S</span>GAME HISTORY
+  </h1>
+</div>
+
+<div class="container text-center" id="filters">
+  <span>Filter by: </span>
+  <select [(ngModel)]="filterActionValue">
+    <option value="all">All</option>
+    <option *ngFor="let action of uniqueActions" [value]="action">
+      {{ action }}
+    </option>
+  </select>
+  <span>Order by: </span>
+  <select [(ngModel)]="filterDirectionValue">
+    <option value="asc">Asc</option>
+    <option value="desc">Desc</option>
+  </select>
+</div>
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Action</th>
+      <th scope="col">Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="
+        let player of playersHistory
+          | filter : filterActionValue
+          | sort : filterDirectionValue;
+        let i = index
+      "
+    >
+      <th scope="row">{{ i }}</th>
+      <td>{{ player.action }}</td>
+      <td style="color: var(--aqua)">{{ player.time }}</td>
+    </tr>
+  </tbody>
+</table>
