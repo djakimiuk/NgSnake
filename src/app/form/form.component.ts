@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { NameAndEmail } from '../app.component';
+import { PlayerInfoService } from '../player-info.service';
 
 export interface NameEmailAndVisibility {
   name: string;
@@ -15,7 +17,10 @@ export interface NameEmailAndVisibility {
 export class FormComponent implements OnInit {
   @Output() public start = new EventEmitter<NameEmailAndVisibility>();
 
-  constructor() {}
+  constructor(
+    private _router: Router,
+    private playerInfoService: PlayerInfoService
+  ) {}
   ngOnInit(): void {}
 
   public formSubmit(form: NameAndEmail) {
@@ -24,5 +29,7 @@ export class FormComponent implements OnInit {
       email: form.email,
       visibility: false,
     });
+    this._router.navigate(['/game']);
+    this.playerInfoService.markFormAsSubmitted();
   }
 }

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { PlayerInfoService } from '../player-info.service';
 
 @Component({
   selector: 'app-navbar',
@@ -6,12 +7,12 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  @Input() scoreVisibility: boolean = true;
+  public scoreVisibility: boolean = true;
   @Input() score: number = 0;
   @Input() timer: number = 0;
-  @Input() gameStatus: string = ''
+  @Input() gameStatus: string = '';
 
-  constructor() {}
+  constructor(private _playerInfoService: PlayerInfoService) {}
 
   ngOnInit(): void {}
 }

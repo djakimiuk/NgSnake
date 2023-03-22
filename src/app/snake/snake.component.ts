@@ -6,7 +6,9 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgxSnakeComponent } from 'ngx-snake';
+import { PlayerInfoService } from '../player-info.service';
 export interface PlayerHistory {
   action: string;
   time: number;
@@ -51,6 +53,7 @@ export class SnakeComponent implements OnInit {
     this.gameStatus.emit('READY');
     this.history.emit(false);
     this._snake.actionReset();
+    this._router.navigate(['/welcome']);
   }
   public gameHistory() {
     this.playerHistory.emit({
@@ -112,7 +115,10 @@ export class SnakeComponent implements OnInit {
     this.playerHistory.emit({ action: 'Left Button', time: this.timer });
   }
 
-  constructor() {}
+  constructor(
+    private _router: Router,
+    private _playerInfoService: PlayerInfoService
+  ) {}
 
   ngOnInit(): void {}
 }

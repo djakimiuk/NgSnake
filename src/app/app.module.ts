@@ -11,6 +11,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HistoryComponent } from './history/history.component';
 import { FilterPipe } from './filter.pipe';
 import { SortPipe } from './sort.pipe';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,18 @@ import { SortPipe } from './sort.pipe';
     FilterPipe,
     SortPipe,
   ],
-  imports: [BrowserModule, NgxSnakeModule, NgbModule, FormsModule],
+  imports: [
+    BrowserModule,
+    NgxSnakeModule,
+    NgbModule,
+    FormsModule,
+    RouterModule.forRoot([
+      { path: 'welcome', component: FormComponent },
+      { path: 'game', component: SnakeComponent },
+      { path: '**', component: FormComponent },
+      { path: '', component: FormComponent },
+    ]),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
