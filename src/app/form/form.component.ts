@@ -15,7 +15,6 @@ export interface NameEmailAndVisibility {
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
-  @Output() public start = new EventEmitter<NameEmailAndVisibility>();
 
   constructor(
     private _router: Router,
@@ -24,12 +23,8 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {}
 
   public formSubmit(form: NameAndEmail) {
-    this.start.emit({
-      name: form.name,
-      email: form.email,
-      visibility: false,
-    });
     this._router.navigate(['/game']);
     this.playerInfoService.markFormAsSubmitted();
+    this.playerInfoService.storePlayerData(form.name, form.email);
   }
 }
