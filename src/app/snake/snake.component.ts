@@ -24,6 +24,7 @@ export class SnakeComponent implements OnInit {
   public currentPlayer: string = '';
   public score: number = 0;
   public timer: number = 0;
+  public gameStatus: string = 'READY';
   public timerInterval: any;
   public isHistoryClicked: boolean = false;
   @Output() history = new EventEmitter<boolean>();
@@ -68,6 +69,10 @@ export class SnakeComponent implements OnInit {
   private _snake!: NgxSnakeComponent;
 
   public onStartButtonPressed() {
+    if (this._gameIfnoService.getStatus() == 'WASTED') {
+      this.onResetButtonPressed();
+      this.onStartButtonPressed();
+    }
     this._snake.actionStart();
     this._gameIfnoService.startTimer();
     this._gameIfnoService.setStatus('STARTED');
