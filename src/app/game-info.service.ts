@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
-import { BehaviorSubject, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, ReplaySubject, timer } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +8,7 @@ export class GameInfoService {
   private _timer: number = 0;
   private _score: number = 0;
   private _gameStatus: string = 'READY';
-  private _timerInterval: any;
+  private _timerSubcription: any;
   @Output() exit = new EventEmitter<boolean>();
   timerValue$ = new BehaviorSubject<number>(0);
   gameStatus$ = new BehaviorSubject<string>('READY');
@@ -17,20 +17,20 @@ export class GameInfoService {
   constructor() {}
 
   public startTimer() {
-    this._timerInterval = setInterval(() => {
+    this._timerSubcription = timer(0, 1000).subscribe(() => {
       this._timer++;
       this.timerValue$.next(this._timer);
-    }, 1000);
+    });
   }
 
   public stopTimer() {
-    clearInterval(this._timerInterval);
+    this._timerSubcription.unsubscribe();
     this._timer = this._timer;
     this.timerValue$.next(this._timer);
   }
 
   public resetTimer() {
-    clearInterval(this._timerInterval);
+    this._timerSubcription.unsubscribe();
     this._timer = 0;
     this.timerValue$.next(this._timer);
   }

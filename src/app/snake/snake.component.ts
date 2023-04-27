@@ -27,26 +27,35 @@ export class SnakeComponent implements OnInit {
   public gameStatus: string = 'READY';
   public timerInterval: any;
   public isHistoryClicked: boolean = false;
+  public startBtnDisabled: boolean = false;
+  public stopBtnDisabled: boolean = true;
+  public resetBtnDisabled: boolean = true;
   @Output() history = new EventEmitter<boolean>();
   @Output() playerHistory = new EventEmitter<PlayerHistory>();
 
   public scoreIncrement() {
     this.score++;
-    this._gameIfnoService.scoreIncrement();
+    this._gameInfoService.scoreIncrement();
   }
 
   public fatality() {
     this.timer = this.timer;
-    this._gameIfnoService.stopTimer();
-    this._gameIfnoService.setStatus('WASTED');
+    this.startBtnDisabled = false;
+    this.stopBtnDisabled = true;
+    this.resetBtnDisabled = false;
+    this._gameInfoService.stopTimer();
+    this._gameInfoService.setStatus('WASTED');
   }
 
   public exitGame() {
     this.score = 0;
     this.timer = 0;
-    this._gameIfnoService.resetTimer();
-    this._gameIfnoService.scoreReset();
-    this._gameIfnoService.setStatus('READY');
+    this.startBtnDisabled = false;
+    this.stopBtnDisabled = true;
+    this.resetBtnDisabled = true;
+    this._gameInfoService.resetTimer();
+    this._gameInfoService.scoreReset();
+    this._gameInfoService.setStatus('READY');
     this._snake.actionReset();
     this._router.navigate(['/welcome']);
     this._playerInfoService.clearPlayerData();
@@ -60,8 +69,8 @@ export class SnakeComponent implements OnInit {
     this._snake.actionStop();
     this.timer = this.timer;
     clearInterval(this.timerInterval);
-    this._gameIfnoService.stopTimer();
-    this._gameIfnoService.setStatus('HISTORY CHECK');
+    this._gameInfoService.stopTimer();
+    this._gameInfoService.setStatus('HISTORY CHECK');
     this.history.emit();
     this.isHistoryClicked = !this.isHistoryClicked;
   }
@@ -69,30 +78,40 @@ export class SnakeComponent implements OnInit {
   private _snake!: NgxSnakeComponent;
 
   public onStartButtonPressed() {
-    if (this._gameIfnoService.getStatus() == 'WASTED') {
+    if (this._gameInfoService.getStatus() == 'WASTED') {
       this.onResetButtonPressed();
       this.onStartButtonPressed();
-    }
+    } else {
+    this.startBtnDisabled = true;
+    this.stopBtnDisabled = false;
+    this.resetBtnDisabled = false;
     this._snake.actionStart();
-    this._gameIfnoService.startTimer();
-    this._gameIfnoService.setStatus('STARTED');
+    this._gameInfoService.startTimer();
+    this._gameInfoService.setStatus('STARTED');
     this.playerHistory.emit({ action: 'Start Game Button', time: this.timer });
+    }
   }
   public onStopButtonPressed() {
     this.playerHistory.emit({ action: 'Stop Game Button', time: this.timer });
+    this.startBtnDisabled = false;
+    this.stopBtnDisabled = true;
+    this.resetBtnDisabled = false;
     this._snake.actionStop();
     this.timer = this.timer;
-    this._gameIfnoService.stopTimer();
-    this._gameIfnoService.setStatus('PAUSED');
+    this._gameInfoService.stopTimer();
+    this._gameInfoService.setStatus('PAUSED');
   }
   public onResetButtonPressed() {
+    this.startBtnDisabled = false;
+    this.stopBtnDisabled = true;
+    this.resetBtnDisabled = true;
     this.playerHistory.emit({ action: 'Reset Game Button', time: this.timer });
     this.score = 0;
     clearInterval(this.timerInterval);
     this.timer = 0;
-    this._gameIfnoService.resetTimer();
-    this._gameIfnoService.scoreReset();
-    this._gameIfnoService.setStatus('READY');
+    this._gameInfoService.resetTimer();
+    this._gameInfoService.scoreReset();
+    this._gameInfoService.setStatus('READY');
     this._snake.actionReset();
   }
   public onUpButtonPressed() {
@@ -115,7 +134,7 @@ export class SnakeComponent implements OnInit {
   constructor(
     private _router: Router,
     private _playerInfoService: PlayerInfoService,
-    private _gameIfnoService: GameInfoService
+    private _gameInfoService: GameInfoService
   ) {}
 
   ngOnInit(): void {

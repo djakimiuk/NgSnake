@@ -11,18 +11,26 @@
     ></ngx-snake>
   </div>
   <div class="text-center">
-    <button class="btn btn-primary me-2" (click)="onStartButtonPressed()">
+    <button
+      [disabled]="startBtnDisabled"
+      class="btn btn-primary me-2"
+      (click)="onStartButtonPressed()"
+    >
       Start
     </button>
-    <button class="btn btn-primary me-2" (click)="onStopButtonPressed()">
+    <button
+      [disabled]="stopBtnDisabled"
+      class="btn btn-primary me-2"
+      (click)="onStopButtonPressed()"
+    >
       Stop
     </button>
-    <button class="btn btn-primary me-2" (click)="onResetButtonPressed()">
+    <button [disabled]="resetBtnDisabled" class="btn btn-primary me-2" (click)="onResetButtonPressed()">
       Reset
     </button>
     <button class="btn btn-primary me-2" (click)="exitGame()">Exit Game</button>
     <button class="btn btn-primary me-2" (click)="gameHistory()">
-      {{isHistoryClicked ?  'Hide Game History' : 'Show Game History'}}
+      {{ isHistoryClicked ? "Hide Game History" : "Show Game History" }}
     </button>
   </div>
   <div class="arrows">

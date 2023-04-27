@@ -42,15 +42,6 @@ export class AppComponent {
     }
     this.historyVisibility = !this.historyVisibility;
   }
-  public onScoreChange(event: number) {
-    this.score = event;
-  }
-  public onTimerChange(event: number) {
-    this.timer = event;
-  }
-  public onStatusChange(event: string) {
-    this.gameStatus = event;
-  }
   public onHistoryChange(event: PlayerHistory) {
     this.playersHistory.push(event);
   }
