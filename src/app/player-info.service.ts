@@ -29,4 +29,7 @@ export class PlayerInfoService {
     this._playerData = [];
   }
 
+  isFormSubmittedCheck() {
+    return this.isFormSubmitted;
+  }
 }

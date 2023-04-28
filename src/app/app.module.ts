@@ -12,6 +12,8 @@ import { HistoryComponent } from './history/history.component';
 import { FilterPipe } from './filter.pipe';
 import { SortPipe } from './sort.pipe';
 import { RouterModule } from '@angular/router';
+import { HighscoresComponent } from './highscores/highscores.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { RouterModule } from '@angular/router';
     HistoryComponent,
     FilterPipe,
     SortPipe,
+    HighscoresComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,9 +34,11 @@ import { RouterModule } from '@angular/router';
     RouterModule.forRoot([
       { path: 'welcome', component: FormComponent },
       { path: 'game', component: SnakeComponent },
+      { path: 'scores', component: HighscoresComponent },
       { path: '**', component: FormComponent },
       { path: '', component: FormComponent },
     ]),
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
