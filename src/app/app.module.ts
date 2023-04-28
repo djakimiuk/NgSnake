@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { FormComponent } from './form/form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SnakeComponent } from './snake/snake.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HistoryComponent } from './history/history.component';
 import { FilterPipe } from './filter.pipe';
@@ -39,6 +39,7 @@ import { HttpClientModule } from '@angular/common/http';
       { path: '', component: FormComponent },
     ]),
     HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

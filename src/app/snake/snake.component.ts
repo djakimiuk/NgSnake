@@ -1,7 +1,7 @@
 import {
   Component,
   EventEmitter,
-  Input,
+  HostListener,
   OnInit,
   Output,
   ViewChild,
@@ -153,4 +153,5 @@ export class SnakeComponent implements OnInit {
     let playerData = this._playerInfoService.getPlayerData();
     this.currentPlayer = playerData.name;
   }
+
 }

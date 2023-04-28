@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Output } from '@angular/core';
 import { NameEmailAndVisibility } from './form/form.component';
 import { PlayerHistory } from './snake/snake.component';
 export interface NameAndEmail {
@@ -44,5 +44,9 @@ export class AppComponent {
   }
   public onHistoryChange(event: PlayerHistory) {
     this.playersHistory.push(event);
+  }
+  @HostListener('document:keyup', ['$event'])
+  keyEvent(event: KeyboardEvent){
+    console.log('it worked');
   }
 }

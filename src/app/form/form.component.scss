@@ -35,3 +35,10 @@ h1 span {
   background-color: var(--errorRed);
 }
 
+.form-group {
+  input {
+    text-align: center;
+    width: 200px;
+    margin: auto;
+  }
+}
