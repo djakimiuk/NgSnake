@@ -8,6 +8,7 @@
       [boardWidth]="12"
       (foodEaten)="scoreIncrement()"
       (gameOver)="fatality()"
+      [ngClass]="[theme]"
     ></ngx-snake>
   </div>
   <div class="text-center">
@@ -25,17 +26,28 @@
     >
       Stop
     </button>
-    <button [disabled]="resetBtnDisabled" class="btn btn-primary me-2" (click)="onResetButtonPressed()">
+    <button
+      [disabled]="resetBtnDisabled"
+      class="btn btn-primary me-2"
+      (click)="onResetButtonPressed()"
+    >
       Reset
     </button>
     <button class="btn btn-primary me-2" (click)="exitGame()">Exit Game</button>
     <button class="btn btn-primary me-2" (click)="gameHistory()">
       {{ isHistoryClicked ? "Hide Game History" : "Show Game History" }}
     </button>
+    <button class="btn btn-primary me-2" (click)="onChangeThemePressed()">
+      Change theme
+    </button>
   </div>
   <div class="arrows">
     <div class="text-center">
-      <button class="btn btn-primary" (click)="onUpButtonPressed()" (window:keydown.arrowup)="onUpButtonPressed()">
+      <button
+        class="btn btn-primary"
+        (click)="onUpButtonPressed()"
+        (window:keydown.arrowup)="onUpButtonPressed()"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -52,7 +64,11 @@
       </button>
     </div>
     <div class="text-center">
-      <button class="btn btn-primary" (click)="onLeftButtonPressed()" (window:keyup.arrowleft)="onLeftButtonPressed()">
+      <button
+        class="btn btn-primary"
+        (click)="onLeftButtonPressed()"
+        (window:keyup.arrowleft)="onLeftButtonPressed()"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -67,7 +83,11 @@
           />
         </svg>
       </button>
-      <button class="btn btn-primary" (click)="onRightButtonPressed()" (window:keyup.arrowright)="onRightButtonPressed()">
+      <button
+        class="btn btn-primary"
+        (click)="onRightButtonPressed()"
+        (window:keyup.arrowright)="onRightButtonPressed()"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -83,8 +103,12 @@
         </svg>
       </button>
     </div>
-    <div class="text-center" >
-      <button class="btn btn-primary" (click)="onDownButtonPressed()" (window:keydown.arrowdown)="onDownButtonPressed()">
+    <div class="text-center">
+      <button
+        class="btn btn-primary"
+        (click)="onDownButtonPressed()"
+        (window:keydown.arrowdown)="onDownButtonPressed()"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"

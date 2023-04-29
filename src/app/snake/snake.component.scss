@@ -27,3 +27,72 @@
 #grid {
   padding: 1em;
 }
+
+.normal {
+  ngx-snake-tile {
+    background: var(--white);
+    &.free {
+      div {
+        background: var(--white);
+      }
+    }
+    &.head,
+    &.tail,
+    &.body {
+      div {
+        background: var(--aqua);
+      }
+    }
+    &.food {
+      div {
+        background: var(--magenta);
+      }
+    }
+  }
+}
+
+.black-white {
+  ngx-snake-tile {
+    background: white;
+    &.free {
+      div {
+        background: white;
+      }
+    }
+    &.head,
+    &.tail,
+    &.body {
+      div {
+        background: black;
+      }
+    }
+    &.food {
+      div {
+        background: black;
+      }
+    }
+  }
+}
+
+.fatality {
+  ngx-snake-tile {
+    background: red;
+    &.free {
+      div {
+        background: red;
+      }
+    }
+    &.head,
+    &.tail,
+    &.body {
+      div {
+        background: black;
+      }
+    }
+    &.food {
+      div {
+        background: black;
+      }
+    }
+  }
+}

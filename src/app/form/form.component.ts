@@ -34,6 +34,8 @@ function tokenValidation(
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
+  public themes: Array<string> = ['normal', 'black-white'];
+  public theme!: any;
   public playerForm!: FormGroup;
   constructor(
     private _router: Router,
@@ -44,16 +46,17 @@ export class FormComponent implements OnInit {
     this.playerForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(5)]],
       token: [null, [Validators.required, tokenValidation]],
-      color: ['normal'],
+      theme: ['normal'],
     });
   }
 
   public formSubmit() {
-    this._router.navigate(['/game']);
+    this.theme = this.playerForm.controls['theme'].value
     this.playerInfoService.markFormAsSubmitted();
     this.playerInfoService.storePlayerData(
       this.playerForm.controls['name'].value,
       this.playerForm.controls['token'].value
     );
+    this._router.navigate([`/game/${this.theme}`]);
   }
 }

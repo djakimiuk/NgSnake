@@ -2,40 +2,52 @@
   <h1>Welcome to <span>NG SNAKE</span></h1>
 </div>
 <div class="container text-center" id="container">
-  <form
-    (submit)="formSubmit()"
-    [formGroup]="playerForm"
-  >
+  <form (submit)="formSubmit()" [formGroup]="playerForm">
     <div class="form-group">
-      <label for="exampleFormControlInput1">Player name</label>
+      <label for="playername">Player name</label>
       <input
         type="text"
         formControlName="name"
         class="form-control"
-        id="exampleFormControlInput1"
+        id="playername"
         placeholder="John Doe"
       />
       <span
-        *ngIf="playerForm.controls['name'].touched && !playerForm.controls['name'].valid"
+        *ngIf="
+          playerForm.controls['name'].touched &&
+          !playerForm.controls['name'].valid
+        "
         class="errorName"
         style="color: red"
         >The name should contain at least 5 characters!</span
       >
     </div>
     <div class="form-group">
-      <label for="exampleFormControlInput1">Token</label>
+      <label for="token">Token</label>
       <input
-      formControlName="token"
+        formControlName="token"
         class="form-control"
-        id="exampleFormControlInput1"
+        id="token"
         placeholder="****"
+        type="password"
       />
       <span
-        *ngIf="playerForm.controls['token'].touched && !playerForm.controls['token'].valid"
+        *ngIf="
+          playerForm.controls['token'].touched &&
+          !playerForm.controls['token'].valid
+        "
         class="errorEmail"
         style="color: red"
         >Invalid token!</span
       >
+    </div>
+    <div class="form-group">
+      <label>Grid theme</label><br>
+      <select formControlName="theme">
+        <option *ngFor="let theme of themes" [ngValue]="theme">
+          {{ theme }}
+        </option>
+      </select>
     </div>
     <button
       type="submit"

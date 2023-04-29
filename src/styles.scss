@@ -37,29 +37,6 @@ body {
   height: 100%;
 }
 
-ngx-snake {
-  ngx-snake-tile {
-    background: var(--white);
-    &.free {
-      div {
-        background: var(--white);
-      }
-    }
-    &.head,
-    &.tail,
-    &.body {
-      div {
-        background: var(--aqua);
-      }
-    }
-    &.food {
-      div {
-        background: var(--magenta);
-      }
-    }
-  }
-}
-
 footer {
   text-align: center;
   margin: 0 auto;

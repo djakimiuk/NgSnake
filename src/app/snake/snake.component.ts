@@ -5,8 +5,9 @@ import {
   OnInit,
   Output,
   ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSnakeComponent } from 'ngx-snake';
 import { PlayerInfoService } from '../player-info.service';
 import { GameInfoService } from '../game-info.service';
@@ -19,6 +20,7 @@ export interface PlayerHistory {
   selector: 'app-snake',
   templateUrl: './snake.component.html',
   styleUrls: ['./snake.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class SnakeComponent implements OnInit {
   public currentPlayer: string = '';
@@ -29,6 +31,8 @@ export class SnakeComponent implements OnInit {
   public startBtnDisabled: boolean = false;
   public stopBtnDisabled: boolean = true;
   public resetBtnDisabled: boolean = true;
+  public url: string = '';
+  public theme: string | null = 'normal';
   @Output() history = new EventEmitter<boolean>();
   @Output() playerHistory = new EventEmitter<PlayerHistory>();
 
@@ -44,6 +48,7 @@ export class SnakeComponent implements OnInit {
     this.resetBtnDisabled = false;
     this._gameInfoService.stopTimer();
     this._gameInfoService.setStatus('WASTED');
+    this.theme = 'fatality';
   }
 
   public exitGame() {
@@ -74,6 +79,7 @@ export class SnakeComponent implements OnInit {
       this._gameInfoService.setStatus('HISTORY CHECK');
     }
     this.history.emit();
+    this._router.navigate(['/history']);
     this.isHistoryClicked = !this.isHistoryClicked;
   }
   @ViewChild(NgxSnakeComponent)
@@ -135,6 +141,11 @@ export class SnakeComponent implements OnInit {
     this.playerHistory.emit({ action: 'Left Button', time: this.timer });
   }
 
+  public onChangeThemePressed() {
+    this.theme = this.theme === 'normal' ? 'black-white' : 'normal';
+    this._router.navigate([`/game/${this.theme}`]);
+  }
+
   public isFormSubmitted() {
     if (this._playerInfoService.isFormSubmittedCheck() === false) {
       this._router.navigate(['/welcome']);
@@ -144,14 +155,17 @@ export class SnakeComponent implements OnInit {
   constructor(
     private _router: Router,
     private _playerInfoService: PlayerInfoService,
-    private _gameInfoService: GameInfoService
+    private _gameInfoService: GameInfoService,
+    private _route: ActivatedRoute
   ) {
     this.isFormSubmitted();
+    this.theme = this._route.snapshot.paramMap.get('color');
   }
 
   ngOnInit(): void {
     let playerData = this._playerInfoService.getPlayerData();
     this.currentPlayer = playerData.name;
+    this.url = this._router.url;
+    console.log(this.url);
   }
-
 }
