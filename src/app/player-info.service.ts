@@ -1,6 +1,7 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { NameAndEmail } from './app.component';
-import { Subject } from 'rxjs';
+import { Observable, Subject, catchError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -8,9 +9,10 @@ import { Subject } from 'rxjs';
 export class PlayerInfoService {
   isFormSubmitted: boolean = false;
   private _playerData: Array<NameAndEmail> = [];
+  private _validationURL = 'https://scores.chrum.it/check-token';
   @Output() change: EventEmitter<boolean> = new EventEmitter();
 
-  constructor() {}
+  constructor(private _http: HttpClient) {}
 
   public markFormAsSubmitted() {
     this.isFormSubmitted = !this.isFormSubmitted;
@@ -31,5 +33,9 @@ export class PlayerInfoService {
 
   isFormSubmittedCheck() {
     return this.isFormSubmitted;
+  }
+
+  validateToken(token: string): Observable<any> {
+    return this._http.post<any>(this._validationURL, { 'auth-token': token });
   }
 }

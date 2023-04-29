@@ -8,6 +8,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { lastValueFrom } from 'rxjs';
 
 export interface NameEmailAndVisibility {
   name: string;
@@ -37,6 +38,7 @@ export class FormComponent implements OnInit {
   public themes: Array<string> = ['normal', 'black-white'];
   public theme!: any;
   public playerForm!: FormGroup;
+  private _response: any = '';
   constructor(
     private _router: Router,
     private playerInfoService: PlayerInfoService,
@@ -45,18 +47,27 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     this.playerForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(5)]],
-      token: [null, [Validators.required, tokenValidation]],
+      token: [null, [Validators.required, ]],
       theme: ['normal'],
     });
   }
 
-  public formSubmit() {
-    this.theme = this.playerForm.controls['theme'].value
-    this.playerInfoService.markFormAsSubmitted();
-    this.playerInfoService.storePlayerData(
-      this.playerForm.controls['name'].value,
+  public async formSubmit() {
+    const source$ = this.playerInfoService.validateToken(
       this.playerForm.controls['token'].value
     );
-    this._router.navigate([`/game/${this.theme}`]);
+    const response = await lastValueFrom(source$);
+    console.log(response.success === true);
+    if (response.success === true) {
+      this.theme = this.playerForm.controls['theme'].value;
+      this.playerInfoService.markFormAsSubmitted();
+      this.playerInfoService.storePlayerData(
+        this.playerForm.controls['name'].value,
+        this.playerForm.controls['token'].value
+      );
+      this._router.navigate([`/game/${this.theme}`]);
+    } else {
+      alert('Invalid token!')
+    }
   }
 }

@@ -13,6 +13,7 @@ export interface Scores {
 export class HighscoresComponent implements OnInit {
   public allScores: any = '';
   public sub!: Subscription;
+  public errorMessage: string = '';
   constructor(private _highscores: HighscoresService) {}
 
   ngOnInit(): void {
@@ -20,6 +21,7 @@ export class HighscoresComponent implements OnInit {
       next: (scores) => {
         this.allScores = scores;
       },
+      error: (err) => (this.errorMessage = err),
     });
   }
   ngOnDestroy(): void {

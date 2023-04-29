@@ -1,3 +1,6 @@
+<span *ngIf="errorMessage" class="errorEmail" style="color: red"
+  >An error occured: {{ errorMessage }}</span
+>
 <div>
   <ul *ngFor="let score of allScores">
     <li>{{ score.name }} - {{ score.score }}</li>

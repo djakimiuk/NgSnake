@@ -18,6 +18,6 @@ export class HighscoresService {
     });
     return this._http
       .get<Scores[]>(this.URL, { headers: headers })
-      .pipe(tap((data) => console.log('All products', data)));
+      .pipe(tap((data) => console.log('All scores', data)));
   }
 }
