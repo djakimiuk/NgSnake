@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NameAndEmail } from '../app.component';
+
 import { PlayerHistory } from '../snake/snake.component';
 
 @Component({
@@ -9,7 +9,7 @@ import { PlayerHistory } from '../snake/snake.component';
 })
 export class HistoryComponent implements OnInit {
   @Input() playersHistory: Array<PlayerHistory> = [];
-  @Input() playersArray: Array<NameAndEmail> = [];
+  @Input() playersArray: Array<any> = [];
   public filterActionValue: string = 'all';
   public filterDirectionValue: string = 'asc';
 

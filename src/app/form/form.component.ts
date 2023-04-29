@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { NameAndEmail } from '../app.component';
 import { PlayerInfoService } from '../player-info.service';
 import {
   AbstractControl,
@@ -47,27 +46,33 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     this.playerForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(5)]],
-      token: [null, [Validators.required, ]],
+      token: [null, [Validators.required]],
       theme: ['normal'],
     });
   }
 
   public async formSubmit() {
-    const source$ = this.playerInfoService.validateToken(
-      this.playerForm.controls['token'].value
-    );
-    const response = await lastValueFrom(source$);
-    console.log(response.success === true);
-    if (response.success === true) {
-      this.theme = this.playerForm.controls['theme'].value;
-      this.playerInfoService.markFormAsSubmitted();
-      this.playerInfoService.storePlayerData(
-        this.playerForm.controls['name'].value,
+    try {
+      const source$ = this.playerInfoService.validateToken(
         this.playerForm.controls['token'].value
       );
-      this._router.navigate([`/game/${this.theme}`]);
-    } else {
-      alert('Invalid token!')
+      const response = await lastValueFrom(source$);
+      console.log(response.success === true);
+      if (response.success === true) {
+        this.theme = this.playerForm.controls['theme'].value;
+        this.playerInfoService.markFormAsSubmitted();
+        this.playerInfoService.storePlayerData({
+          name: this.playerForm.controls['name'].value,
+          token: this.playerForm.controls['token'].value,
+          theme: this.theme,
+          date: new Date(),
+        });
+        this._router.navigate([`/game/${this.theme}`]);
+      } else {
+        alert('Invalid token!');
+      }
+    } catch (error) {
+      alert(`There was an error: ${error}`);
     }
   }
 }

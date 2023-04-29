@@ -53,4 +53,7 @@ export class GameInfoService {
   public getStatus() {
     return this._gameStatus;
   }
+  public getScore() {
+    return this._score;
+  }
 }

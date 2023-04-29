@@ -11,6 +11,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSnakeComponent } from 'ngx-snake';
 import { PlayerInfoService } from '../player-info.service';
 import { GameInfoService } from '../game-info.service';
+import { HighscoresService } from '../highscores.service';
+import { lastValueFrom } from 'rxjs';
 export interface PlayerHistory {
   action: string;
   time: number;
@@ -41,14 +43,21 @@ export class SnakeComponent implements OnInit {
     this._gameInfoService.scoreIncrement();
   }
 
-  public fatality() {
-    this.timer = this.timer;
-    this.startBtnDisabled = false;
-    this.stopBtnDisabled = true;
-    this.resetBtnDisabled = false;
-    this._gameInfoService.stopTimer();
-    this._gameInfoService.setStatus('WASTED');
-    this.theme = 'fatality';
+  public async fatality() {
+    try {
+      this.timer = this.timer;
+      this.startBtnDisabled = false;
+      this.stopBtnDisabled = true;
+      this.resetBtnDisabled = false;
+      this._gameInfoService.stopTimer();
+      this._gameInfoService.setStatus('WASTED');
+      this.theme = 'fatality';
+      const source$ = this._highscoresService.postScore();
+      const response = await lastValueFrom(source$);
+      alert(`Score saved succesfully`);
+    } catch (error) {
+      alert(`There was an error ${error}`);
+    }
   }
 
   public exitGame() {
@@ -156,7 +165,8 @@ export class SnakeComponent implements OnInit {
     private _router: Router,
     private _playerInfoService: PlayerInfoService,
     private _gameInfoService: GameInfoService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _highscoresService: HighscoresService
   ) {
     this.isFormSubmitted();
     this.theme = this._route.snapshot.paramMap.get('color');
