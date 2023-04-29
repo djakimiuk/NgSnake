@@ -34,7 +34,8 @@ import { HttpClientModule } from '@angular/common/http';
     RouterModule.forRoot([
       { path: 'welcome', component: FormComponent },
       { path: 'game', component: SnakeComponent },
-      { path: 'scores', component: HighscoresComponent },
+      { path: 'game/history', component: HistoryComponent },
+      { path: 'game/scores', component: HighscoresComponent },
       { path: '**', component: FormComponent },
       { path: '', component: FormComponent },
     ]),
