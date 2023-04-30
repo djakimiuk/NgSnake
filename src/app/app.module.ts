@@ -14,6 +14,8 @@ import { SortPipe } from './sort.pipe';
 import { RouterModule } from '@angular/router';
 import { HighscoresComponent } from './highscores/highscores.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FilterPlayersPipe } from './filter-players.pipe';
+import { SortPlayersPipe } from './sort-players.pipe';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
     FilterPipe,
     SortPipe,
     HighscoresComponent,
+    FilterPlayersPipe,
+    SortPlayersPipe,
   ],
   imports: [
     BrowserModule,

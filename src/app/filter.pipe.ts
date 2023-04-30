@@ -6,7 +6,7 @@ import { PlayerHistory } from './snake/snake.component';
 export class FilterPipe implements PipeTransform {
   transform(value: Array<PlayerHistory>, filterBy: string) {
     if (!value) {
-      return value;
+      return [];
     }
     if (filterBy === 'all') {
       return value;

@@ -14,6 +14,9 @@ export class HighscoresComponent implements OnInit {
   public allScores: any = '';
   public sub!: Subscription;
   public errorMessage: string = '';
+  public filterDirectionValue: string = 'desc';
+  public filterActionValue: string = 'my-scores';
+  public playerName: string = 'Dawid'
   constructor(private _highscores: HighscoresService) {}
 
   ngOnInit(): void {

@@ -26,7 +26,5 @@ export class HistoryComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(this.filterDirectionValue);
-  }
+  ngOnInit(): void {}
 }

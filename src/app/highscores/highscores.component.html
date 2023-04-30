@@ -1,8 +1,47 @@
+<div class="container text-center" id="welcome">
+  <h1>High Scores</h1>
+</div>
+
+<div class="container text-center" id="filters">
+  <span>Filter by: </span>
+  <select [(ngModel)]="filterActionValue">
+    <option value="all">All</option>
+    <option value="my-scores">My scores</option>
+    <option *ngFor="let score of allScores" [value]="score.name">
+      {{ score.name }}
+    </option>
+  </select>
+  <span>Order by: </span>
+  <select [(ngModel)]="filterDirectionValue">
+    <option value="asc">Asc</option>
+    <option value="desc">Desc</option>
+  </select>
+</div>
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Player name</th>
+      <th scope="col">Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="
+        let score of allScores
+          | filterPlayers : filterActionValue : playerName
+          | sortPlayers : filterDirectionValue;
+        let i = index
+      "
+    >
+      <th scope="row">{{ i }}</th>
+      <td>{{ score.name }}</td>
+      <td style="color: var(--aqua)">{{ score.score }}</td>
+    </tr>
+  </tbody>
+</table>
+
 <span *ngIf="errorMessage" class="errorEmail" style="color: red"
   >An error occured: {{ errorMessage }}</span
 >
-<div>
-  <ul *ngFor="let score of allScores">
-    <li>{{ score.name }} - {{ score.score }}</li>
-  </ul>
-</div>
