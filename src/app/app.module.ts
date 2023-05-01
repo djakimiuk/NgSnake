@@ -18,6 +18,8 @@ import { FilterPlayersPipe } from './pipes/filter-players.pipe';
 import { SortPlayersPipe } from './pipes/sort-players.pipe';
 import { MyscoresComponent } from '../components/myscores/myscores.component';
 import { PlayerDataGuard } from '../guards/player-data.guard';
+import { Top10PlayersPipe } from './pipes/top10-players.pipe';
+import { UniquePlayersPipe } from './pipes/unique-players.pipe';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { PlayerDataGuard } from '../guards/player-data.guard';
     FilterPlayersPipe,
     SortPlayersPipe,
     MyscoresComponent,
+    Top10PlayersPipe,
+    UniquePlayersPipe,
   ],
   imports: [
     BrowserModule,

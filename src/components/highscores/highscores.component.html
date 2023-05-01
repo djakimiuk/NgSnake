@@ -13,8 +13,8 @@
   <span>Filter by: </span>
   <select [(ngModel)]="filterActionValue">
     <option value="all">All</option>
-    <option *ngFor="let score of allScores" [value]="score.name">
-      {{ score.name }}
+    <option *ngFor="let player of allScores | uniquePlayers" [value]="player">
+      {{ player }}
     </option>
   </select>
   <span>Order by: </span>
@@ -36,12 +36,13 @@
     <tr
       *ngFor="
         let score of allScores
+          | top10Players : 10
           | filterPlayers : filterActionValue
           | sortPlayers : filterDirectionValue;
         let i = index
       "
     >
-      <th scope="row">{{ i }}</th>
+      <th scope="row">{{ i + 1 }}</th>
       <td>{{ score.name }}</td>
       <td style="color: var(--aqua)">{{ score.score }}</td>
     </tr>
