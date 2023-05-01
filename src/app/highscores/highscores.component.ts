@@ -8,7 +8,7 @@ import { Scores } from '../interfaces/scores.interface';
   styleUrls: ['./highscores.component.scss'],
 })
 export class HighscoresComponent implements OnInit {
-  public allScores: any = ''; 
+  public allScores: Array<Scores> = [];
   public sub!: Subscription;
   public errorMessage: string = '';
   public filterDirectionValue: string = 'desc';

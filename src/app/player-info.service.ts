@@ -37,8 +37,12 @@ export class PlayerInfoService {
     this._playerData = [];
   }
 
-  isFormSubmittedCheck() {
+  public isFormSubmittedCheck() {
     return this.isFormSubmitted;
+  }
+
+  public checkPlayerData() {
+    return this._playerData.length !== 0;
   }
 
   validateToken(token: string): Observable<any> {

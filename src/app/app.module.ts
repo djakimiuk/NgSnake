@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FilterPlayersPipe } from './filter-players.pipe';
 import { SortPlayersPipe } from './sort-players.pipe';
 import { MyscoresComponent } from './myscores/myscores.component';
+import { PlayerDataGuard } from './player-data.guard';
 
 @NgModule({
   declarations: [
@@ -39,12 +40,28 @@ import { MyscoresComponent } from './myscores/myscores.component';
     FormsModule,
     RouterModule.forRoot([
       { path: 'welcome', component: FormComponent },
-      { path: 'game/:color', component: SnakeComponent },
-      { path: 'history', component: HistoryComponent },
-      { path: 'scores', component: HighscoresComponent },
-      {path: 'myscores', component: MyscoresComponent},
-      { path: '**', component: FormComponent },
-      { path: '', component: FormComponent },
+      {
+        path: 'game/:color',
+        canActivate: [PlayerDataGuard],
+        component: SnakeComponent,
+      },
+      {
+        path: 'history',
+        canActivate: [PlayerDataGuard],
+        component: HistoryComponent,
+      },
+      {
+        path: 'scores',
+        canActivate: [PlayerDataGuard],
+        component: HighscoresComponent,
+      },
+      {
+        path: 'myscores',
+        canActivate: [PlayerDataGuard],
+        component: MyscoresComponent,
+      },
+      { path: '**', redirectTo: '/welcome', pathMatch: 'full' },
+      { path: '', redirectTo: '/welcome', pathMatch: 'full' },
     ]),
     HttpClientModule,
     ReactiveFormsModule,

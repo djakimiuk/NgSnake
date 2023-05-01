@@ -155,12 +155,6 @@ export class SnakeComponent implements OnInit {
     this._router.navigate([`/game/${this.theme}`]);
   }
 
-  public isFormSubmitted() {
-    if (this._playerInfoService.isFormSubmittedCheck() === false) {
-      this._router.navigate(['/welcome']);
-    }
-  }
-
   public onMyScoresPressed() {
     this._router.navigate(['/myscores']);
   }
@@ -172,7 +166,6 @@ export class SnakeComponent implements OnInit {
     private _route: ActivatedRoute,
     private _highscoresService: HighscoresService
   ) {
-    this.isFormSubmitted();
     this.theme = this._route.snapshot.paramMap.get('color');
   }
 
@@ -180,6 +173,5 @@ export class SnakeComponent implements OnInit {
     let playerData = this._playerInfoService.getPlayerData();
     this.currentPlayer = playerData.name;
     this.url = this._router.url;
-    console.log(this.url);
   }
 }
