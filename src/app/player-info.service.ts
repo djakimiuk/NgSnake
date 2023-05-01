@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
-import { Observable, Subject, catchError } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, catchError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 export interface PlayerData {
@@ -13,16 +13,16 @@ export interface PlayerData {
   providedIn: 'root',
 })
 export class PlayerInfoService {
-  isFormSubmitted: boolean = false;
+  private _isFormSubmitted: boolean = false;
   private _playerData: Array<PlayerData> = [];
   private _validationURL = 'https://scores.chrum.it/check-token';
-  @Output() change: EventEmitter<boolean> = new EventEmitter();
+  isFormSubmitted$ = new BehaviorSubject<boolean>(false)
 
   constructor(private _http: HttpClient) {}
 
   public markFormAsSubmitted() {
-    this.isFormSubmitted = !this.isFormSubmitted;
-    this.change.emit(this.isFormSubmitted);
+    this._isFormSubmitted = !this._isFormSubmitted;
+    this.isFormSubmitted$.next(this._isFormSubmitted);
   }
 
   public storePlayerData(playerData: PlayerData) {
@@ -38,7 +38,7 @@ export class PlayerInfoService {
   }
 
   public isFormSubmittedCheck() {
-    return this.isFormSubmitted;
+    return this._isFormSubmitted;
   }
 
   public checkPlayerData() {

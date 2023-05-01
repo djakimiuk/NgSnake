@@ -9,7 +9,7 @@ import { combineLatest } from 'rxjs';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  public scoreVisibility: boolean = false;
+  public scoreVisibility$ = this._playerInfoService.isFormSubmitted$;
   public timer = 0;
   public score$ = this._gameInfoService.score$;
   public timer$ = this._gameInfoService.timerValue$;
@@ -20,11 +20,7 @@ export class NavbarComponent implements OnInit {
     private _gameInfoService: GameInfoService
   ) {}
 
-  ngOnInit() {
-    this._playerInfoService.change.subscribe((isFormSubmitted) => {
-      this.scoreVisibility = isFormSubmitted;
-    });
-  }
+  ngOnInit() {}
   ngOnDestroy() {
     this._gameInfoService.resetTimer();
   }

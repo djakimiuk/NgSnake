@@ -9,7 +9,6 @@ export class GameInfoService {
   private _score: number = 0;
   private _gameStatus: string = 'READY';
   private _timerSubcription: any;
-  @Output() exit = new EventEmitter<boolean>();
   timerValue$ = new BehaviorSubject<number>(0);
   gameStatus$ = new BehaviorSubject<string>('READY');
   score$ = new BehaviorSubject<number>(0);
