@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PlayerInfoService } from '../player-info.service';
-import { GameInfoService } from '../game-info.service';
+import { PlayerInfoService } from '../../app/services/player-info.service';
+import { GameInfoService } from '../../app/services/game-info.service';
 import { combineLatest } from 'rxjs';
 
 @Component({

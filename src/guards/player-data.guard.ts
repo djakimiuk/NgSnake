@@ -7,7 +7,7 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { PlayerInfoService } from './player-info.service';
+import { PlayerInfoService } from '../app/services/player-info.service';
 
 @Injectable({
   providedIn: 'root',
@@ -32,4 +32,3 @@ export class PlayerDataGuard implements CanActivate {
     return true;
   }
 }
-

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HighscoresService } from '../highscores.service';
+import { HighscoresService } from '../../app/services/highscores.service';
 import { Subscription } from 'rxjs';
-import { Scores } from '../interfaces/scores.interface';
+import { Scores } from '../../app/interfaces/scores.interface';
 @Component({
   selector: 'app-highscores',
   templateUrl: './highscores.component.html',

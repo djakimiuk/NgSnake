@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Scores } from './interfaces/scores.interface';
+import { Scores } from '../interfaces/scores.interface';
 import { Observable, Subscription, tap } from 'rxjs';
 import { PlayerInfoService } from './player-info.service';
 import { GameInfoService } from './game-info.service';

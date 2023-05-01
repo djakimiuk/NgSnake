@@ -16,5 +16,4 @@ export class AppComponent {
   public gameStatus: string = 'READY';
   public playersHistory: Array<PlayerHistory> = [];
   public historyVisibility = true;
-
 }

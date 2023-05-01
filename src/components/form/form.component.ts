@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { PlayerInfoService } from '../player-info.service';
+import { PlayerInfoService } from '../../app/services/player-info.service';
 import {
   AbstractControl,
   FormBuilder,

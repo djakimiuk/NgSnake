@@ -9,9 +9,9 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSnakeComponent } from 'ngx-snake';
-import { PlayerInfoService } from '../player-info.service';
-import { GameInfoService } from '../game-info.service';
-import { HighscoresService } from '../highscores.service';
+import { PlayerInfoService } from '../../app/services/player-info.service';
+import { GameInfoService } from '../../app/services/game-info.service';
+import { HighscoresService } from '../../app/services/highscores.service';
 import { lastValueFrom } from 'rxjs';
 export interface PlayerHistory {
   action: string;

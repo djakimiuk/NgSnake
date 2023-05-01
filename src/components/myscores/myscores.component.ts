@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { PlayerInfoService } from '../player-info.service';
-import { HighscoresService } from '../highscores.service';
-import { Scores } from '../interfaces/scores.interface';
+import { PlayerInfoService } from '../../app/services/player-info.service';
+import { HighscoresService } from '../../app/services/highscores.service';
+import { Scores } from '../../app/interfaces/scores.interface';
 
 @Component({
   selector: 'app-myscores',

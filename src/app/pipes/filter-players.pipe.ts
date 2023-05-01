@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Scores } from './interfaces/scores.interface';
+import { Scores } from '../interfaces/scores.interface';
 
 @Pipe({
   name: 'filterPlayers',
