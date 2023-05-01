@@ -1,5 +1,6 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { BehaviorSubject, ReplaySubject, timer } from 'rxjs';
+import { PlayerHistory } from '../interfaces/player-history.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -9,9 +10,11 @@ export class GameInfoService {
   private _score: number = 0;
   private _gameStatus: string = 'READY';
   private _timerSubcription: any;
+  private _historyArray: Array<PlayerHistory> = [];
   timerValue$ = new BehaviorSubject<number>(0);
   gameStatus$ = new BehaviorSubject<string>('READY');
   score$ = new BehaviorSubject<number>(0);
+  historyArrayChange$ = new BehaviorSubject<Array<PlayerHistory>>([]);
 
   constructor() {}
 
@@ -54,5 +57,11 @@ export class GameInfoService {
   }
   public getScore() {
     return this._score;
+  }
+  public saveAction(action: string) {
+    this._historyArray.push({ action: action, time: this._timer });
+  }
+  public getActionHistory() {
+    return this._historyArray;
   }
 }

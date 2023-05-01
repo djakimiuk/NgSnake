@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { NameEmailAndVisibility } from './form/form.component';
-import { PlayerHistory } from './snake/snake.component';
+import { PlayerHistory } from 'src/app/interfaces/player-history.interface';
 
 @Component({
   selector: 'app-root',

@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { PlayerHistory } from '../snake/snake.component';
+import { PlayerHistory } from 'src/app/interfaces/player-history.interface';
+import { GameInfoService } from 'src/app/services/game-info.service';
+import { PlayerInfoService } from 'src/app/services/player-info.service';
 
 @Component({
   selector: 'app-history',
@@ -8,10 +10,10 @@ import { PlayerHistory } from '../snake/snake.component';
   styleUrls: ['./history.component.scss'],
 })
 export class HistoryComponent implements OnInit {
-  @Input() playersHistory: Array<PlayerHistory> = [];
-  @Input() playersArray: Array<any> = [];
-  public filterActionValue: string = 'all';
+  public playersHistory: Array<PlayerHistory> = [];
   public filterDirectionValue: string = 'asc';
+  public filterActionValue: string = 'all';
+  public playerName: string = '';
 
   public uniqueActions = [
     'Game History Button',
@@ -24,7 +26,14 @@ export class HistoryComponent implements OnInit {
     'Left Button',
   ];
 
-  constructor() {}
+  constructor(
+    private _gameInfoService: GameInfoService,
+    private _playerInfoService: PlayerInfoService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let playerData = this._playerInfoService.getPlayerData();
+    this.playerName = playerData.name;
+    this.playersHistory = this._gameInfoService.getActionHistory();
+  }
 }

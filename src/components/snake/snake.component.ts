@@ -13,10 +13,7 @@ import { PlayerInfoService } from '../../app/services/player-info.service';
 import { GameInfoService } from '../../app/services/game-info.service';
 import { HighscoresService } from '../../app/services/highscores.service';
 import { lastValueFrom } from 'rxjs';
-export interface PlayerHistory {
-  action: string;
-  time: number;
-}
+import { PlayerHistory } from 'src/app/interfaces/player-history.interface';
 
 @Component({
   selector: 'app-snake',
@@ -35,8 +32,6 @@ export class SnakeComponent implements OnInit {
   public resetBtnDisabled: boolean = true;
   public url: string = '';
   public theme: string | null = 'normal';
-  @Output() history = new EventEmitter<boolean>();
-  @Output() playerHistory = new EventEmitter<PlayerHistory>();
 
   public scoreIncrement() {
     this.score++;
@@ -77,17 +72,13 @@ export class SnakeComponent implements OnInit {
     this._playerInfoService.markFormAsSubmitted();
   }
   public gameHistory() {
-    this.playerHistory.emit({
-      action: 'Game History Button',
-      time: this.timer,
-    });
+    this._gameInfoService.saveAction('Game History Button');
     this._snake.actionStop();
     this.timer = this.timer;
     if (this.gameStatus !== 'READY') {
       this._gameInfoService.stopTimer();
       this._gameInfoService.setStatus('HISTORY CHECK');
     }
-    this.history.emit();
     this._router.navigate(['/history']);
     this.isHistoryClicked = !this.isHistoryClicked;
   }
@@ -105,14 +96,11 @@ export class SnakeComponent implements OnInit {
       this._snake.actionStart();
       this._gameInfoService.startTimer();
       this._gameInfoService.setStatus('STARTED');
-      this.playerHistory.emit({
-        action: 'Start Game Button',
-        time: this.timer,
-      });
+      this._gameInfoService.saveAction('Start Game Button');
     }
   }
   public onStopButtonPressed() {
-    this.playerHistory.emit({ action: 'Stop Game Button', time: this.timer });
+    this._gameInfoService.saveAction('Stop Game Button');
     this.startBtnDisabled = false;
     this.stopBtnDisabled = true;
     this.resetBtnDisabled = false;
@@ -125,7 +113,7 @@ export class SnakeComponent implements OnInit {
     this.startBtnDisabled = false;
     this.stopBtnDisabled = true;
     this.resetBtnDisabled = true;
-    this.playerHistory.emit({ action: 'Reset Game Button', time: this.timer });
+    this._gameInfoService.saveAction('Reset Game Button');
     this.score = 0;
     this.timer = 0;
     this._gameInfoService.resetTimer();
@@ -135,19 +123,19 @@ export class SnakeComponent implements OnInit {
   }
   public onUpButtonPressed() {
     this._snake.actionUp();
-    this.playerHistory.emit({ action: 'Up Button', time: this.timer });
+    this._gameInfoService.saveAction('Up Button');
   }
   public onRightButtonPressed() {
     this._snake.actionRight();
-    this.playerHistory.emit({ action: 'Right Button', time: this.timer });
+    this._gameInfoService.saveAction('Right Button');
   }
   public onDownButtonPressed() {
     this._snake.actionDown();
-    this.playerHistory.emit({ action: 'Down Button', time: this.timer });
+    this._gameInfoService.saveAction('Down Button');
   }
   public onLeftButtonPressed() {
     this._snake.actionLeft();
-    this.playerHistory.emit({ action: 'Left Button', time: this.timer });
+    this._gameInfoService.saveAction('Left Button');
   }
 
   public onChangeThemePressed() {

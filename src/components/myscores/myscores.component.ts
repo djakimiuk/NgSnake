@@ -14,7 +14,7 @@ export class MyscoresComponent implements OnInit {
   public sub!: Subscription;
   public filterDirectionValue: string = 'desc';
   public errorMessage: string = '';
-  public playerName: string = 'Dawid';
+  public playerName: string = '';
 
   constructor(
     private _playerInfoService: PlayerInfoService,

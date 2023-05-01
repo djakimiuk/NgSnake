@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { PlayerHistory } from '../../components/snake/snake.component';
+import { PlayerHistory } from '../interfaces/player-history.interface';
 @Pipe({
   name: 'filter',
 })
