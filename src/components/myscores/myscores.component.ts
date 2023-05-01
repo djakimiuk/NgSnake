@@ -3,6 +3,8 @@ import { Subscription } from 'rxjs';
 import { PlayerInfoService } from '../../app/services/player-info.service';
 import { HighscoresService } from '../../app/services/highscores.service';
 import { Scores } from '../../app/interfaces/scores.interface';
+import { Location } from '@angular/common';
+import { GameInfoService } from 'src/app/services/game-info.service';
 
 @Component({
   selector: 'app-myscores',
@@ -16,9 +18,16 @@ export class MyscoresComponent implements OnInit {
   public errorMessage: string = '';
   public playerName: string = '';
 
+  public onBackPressed(): void {
+    this._location.back();
+    this._gameInfoService.setStatus('READY')
+  }
+
   constructor(
     private _playerInfoService: PlayerInfoService,
-    private _highscoresService: HighscoresService
+    private _highscoresService: HighscoresService,
+    private _gameInfoService: GameInfoService,
+    private _location: Location
   ) {}
 
   ngOnInit(): void {

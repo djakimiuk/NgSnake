@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-
+import { Location } from '@angular/common';
 import { PlayerHistory } from 'src/app/interfaces/player-history.interface';
 import { GameInfoService } from 'src/app/services/game-info.service';
 import { PlayerInfoService } from 'src/app/services/player-info.service';
@@ -26,9 +26,15 @@ export class HistoryComponent implements OnInit {
     'Left Button',
   ];
 
+  public onBackPressed(): void {
+    this._location.back();
+    this._gameInfoService.setStatus('READY')
+  }
+
   constructor(
     private _gameInfoService: GameInfoService,
-    private _playerInfoService: PlayerInfoService
+    private _playerInfoService: PlayerInfoService,
+    private _location: Location
   ) {}
 
   ngOnInit(): void {

@@ -26,3 +26,13 @@ table {
   span {
     padding: 0.5em;
   }
+  .btn-primary {
+    background-color: var(--button) !important;
+    margin: 1em auto;
+    box-shadow: -1px 0 0 0 var(--aqua), 1px 0 0 0, 0 -1px 0 0 var(--aqua),
+      0 1px 0 0;
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--magenta) !important;
+  }

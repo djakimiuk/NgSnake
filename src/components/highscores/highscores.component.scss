@@ -1,28 +1,38 @@
 table {
-    width: 600px;
-    margin: 0 auto;
-  }
-  th {
-    color: var(--magenta)
-  }
-  
-  h1 {
-    color: var(--aqua);
-    font-size: 2.5em
-  }
-  
-  h1 span {
-    color: var(--magenta);
-  }
-  
-  table {
-    padding: 1em;
-  }
-  
-  #filters {
+  width: 600px;
+  margin: 0 auto;
+}
+th {
+  color: var(--magenta);
+}
+
+h1 {
+  color: var(--aqua);
+  font-size: 2.5em;
+}
+
+h1 span {
+  color: var(--magenta);
+}
+
+table {
+  padding: 1em;
+}
+
+#filters {
   margin: 1em auto;
-  }
-  
-  span {
-    padding: 0.5em;
-  }
+}
+
+span {
+  padding: 0.5em;
+}
+.btn-primary {
+  background-color: var(--button) !important;
+  margin: 1em auto;
+  box-shadow: -1px 0 0 0 var(--aqua), 1px 0 0 0, 0 -1px 0 0 var(--aqua),
+    0 1px 0 0;
+}
+
+.btn-primary:hover {
+  background-color: var(--magenta) !important;
+}

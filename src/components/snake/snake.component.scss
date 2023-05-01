@@ -28,6 +28,18 @@
   padding: 1em;
 }
 
+.nav-link {
+  color: var(--aqua);
+}
+
+.nav-link:hover {
+  color: var(--magenta);
+}
+
+#pointer {
+  cursor: pointer;
+}
+
 .normal {
   ngx-snake-tile {
     background: var(--white);

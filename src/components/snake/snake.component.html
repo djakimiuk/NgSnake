@@ -2,6 +2,30 @@
   <h1>
     GOOD LUCK <span>{{ currentPlayer }}!</span>
   </h1>
+  <nav class="navbar navbar-expand-lg">
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+      <ul class="navbar-nav mr-auto gap-2">
+        <li class="nav-item">
+          <a class="nav-link" id="pointer" (click)="onMyScoresPressed()"
+            >My Scores</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pointer" (click)="onHighScoresPressed()">Highscores</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pointer" (click)="gameHistory()"
+            >Game History</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pointer" (click)="onChangeThemePressed()"
+            >Theme: {{ theme }} <span id="theme"></span
+          ></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
   <div class="d-flex justify-content-center" id="grid">
     <ngx-snake
       [boardHeight]="12"
@@ -34,15 +58,6 @@
       Reset
     </button>
     <button class="btn btn-primary me-2" (click)="exitGame()">Exit Game</button>
-    <button class="btn btn-primary me-2" (click)="gameHistory()">
-      {{ isHistoryClicked ? "Hide Game History" : "Show Game History" }}
-    </button>
-    <button class="btn btn-primary me-2" (click)="onChangeThemePressed()">
-      Change theme
-    </button>
-    <button class="btn btn-primary me-2" (click)="onMyScoresPressed()">
-      My scores
-    </button>
   </div>
   <div class="arrows">
     <div class="text-center">

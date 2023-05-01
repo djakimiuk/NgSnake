@@ -5,13 +5,10 @@ nav {
   justify-content: center;
 }
 
-.nav-link {
-  color: var(--white);
-}
-
 .navbar-brand {
   color: var(--aqua);
-  font-size: 1.5em;
+  font-size: 1.8em;
+  align-content: baseline;
 }
 
 nav [class*="fa-"] {
@@ -36,7 +33,15 @@ nav [class*="fa-"] {
 .nav-link {
   color: var(--magenta);
 }
+.nav-link2 {
+  color: var(--magenta);
+}
 
-.nav-link span {
+
+.nav-link2 span {
+  color: var(--aqua);
+}
+
+.nav-link:hover {
   color: var(--aqua);
 }

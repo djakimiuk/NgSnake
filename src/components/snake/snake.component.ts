@@ -26,12 +26,12 @@ export class SnakeComponent implements OnInit {
   public score: number = 0;
   public timer: number = 0;
   public gameStatus: string = 'READY';
+  public theme: string;
   public isHistoryClicked: boolean = false;
   public startBtnDisabled: boolean = false;
   public stopBtnDisabled: boolean = true;
   public resetBtnDisabled: boolean = true;
   public url: string = '';
-  public theme: string | null = 'normal';
 
   public scoreIncrement() {
     this.score++;
@@ -72,18 +72,37 @@ export class SnakeComponent implements OnInit {
     this._playerInfoService.markFormAsSubmitted();
   }
   public gameHistory() {
-    this._gameInfoService.saveAction('Game History Button');
-    this._snake.actionStop();
-    this.timer = this.timer;
     if (this.gameStatus !== 'READY') {
       this._gameInfoService.stopTimer();
-      this._gameInfoService.setStatus('HISTORY CHECK');
+      this._snake.actionStop();
+      this.timer = this.timer;
     }
+    this._gameInfoService.saveAction('Game History Button');
+    this._gameInfoService.setStatus('HISTORY CHECK');
     this._router.navigate(['/history']);
-    this.isHistoryClicked = !this.isHistoryClicked;
   }
-  @ViewChild(NgxSnakeComponent)
-  private _snake!: NgxSnakeComponent;
+
+  public onMyScoresPressed() {
+    if (this.gameStatus !== 'READY') {
+      this._gameInfoService.stopTimer();
+      this._snake.actionStop();
+      this.timer = this.timer;
+    }
+    this._gameInfoService.saveAction('My Scores Button');
+    this._gameInfoService.setStatus('MY SCORES CHECK');
+    this._router.navigate(['/myscores']);
+  }
+
+  public onHighScoresPressed() {
+    if (this.gameStatus !== 'READY') {
+      this._gameInfoService.stopTimer();
+      this._snake.actionStop();
+      this.timer = this.timer;
+    }
+    this._gameInfoService.saveAction('Highscores Button');
+    this._gameInfoService.setStatus('HIGHSCORES CHECK');
+    this._router.navigate(['/scores']);
+  }
 
   public onStartButtonPressed() {
     if (this._gameInfoService.getStatus() == 'WASTED') {
@@ -143,9 +162,8 @@ export class SnakeComponent implements OnInit {
     this._router.navigate([`/game/${this.theme}`]);
   }
 
-  public onMyScoresPressed() {
-    this._router.navigate(['/myscores']);
-  }
+  @ViewChild(NgxSnakeComponent)
+  private _snake!: NgxSnakeComponent;
 
   constructor(
     private _router: Router,
@@ -154,7 +172,8 @@ export class SnakeComponent implements OnInit {
     private _route: ActivatedRoute,
     private _highscoresService: HighscoresService
   ) {
-    this.theme = this._route.snapshot.paramMap.get('color');
+    let theme = this._route.snapshot.paramMap.get('color');
+    this.theme = theme ? theme : '';
   }
 
   ngOnInit(): void {

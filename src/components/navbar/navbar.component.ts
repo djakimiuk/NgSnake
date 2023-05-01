@@ -20,7 +20,9 @@ export class NavbarComponent implements OnInit {
     private _gameInfoService: GameInfoService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+
+  }
   ngOnDestroy() {
     this._gameInfoService.resetTimer();
   }

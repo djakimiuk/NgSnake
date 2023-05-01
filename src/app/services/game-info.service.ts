@@ -1,6 +1,7 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { BehaviorSubject, ReplaySubject, timer } from 'rxjs';
 import { PlayerHistory } from '../interfaces/player-history.interface';
+import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -11,12 +12,15 @@ export class GameInfoService {
   private _gameStatus: string = 'READY';
   private _timerSubcription: any;
   private _historyArray: Array<PlayerHistory> = [];
+  private _theme: string = '';
   timerValue$ = new BehaviorSubject<number>(0);
   gameStatus$ = new BehaviorSubject<string>('READY');
   score$ = new BehaviorSubject<number>(0);
   historyArrayChange$ = new BehaviorSubject<Array<PlayerHistory>>([]);
 
-  constructor() {}
+  constructor(private _location: Location) {}
+
+  ngOnInit() {}
 
   public startTimer() {
     this._timerSubcription = timer(0, 1000).subscribe(() => {

@@ -1,7 +1,14 @@
 <div class="container text-center" id="welcome">
   <h1>High Scores</h1>
+  <button
+    routerLink="/game"
+    type="submit"
+    class="btn btn-primary"
+    (click)="onBackPressed()"
+  >
+    Back
+  </button>
 </div>
-<button onclick="onBackPressed()"></button>
 <div class="container text-center" id="filters">
   <span>Filter by: </span>
   <select [(ngModel)]="filterActionValue">

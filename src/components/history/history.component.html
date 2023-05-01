@@ -2,6 +2,14 @@
   <h1>
     <span>{{ playerName }}'S</span>GAME HISTORY
   </h1>
+  <button
+routerLink="/game"
+type="submit"
+class="btn btn-primary"
+(click)="onBackPressed()"
+>
+Back
+</button>
 </div>
 
 <div class="container text-center" id="filters">

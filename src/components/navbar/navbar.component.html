@@ -1,20 +1,20 @@
 <nav class="navbar navbar-expand-lg">
   <span class="fa-solid fa-terminal" aria-hidden="true"></span>
-  <a href="/" class="navbar-brand">NG SNAKE</a>
+  <a routerLink="/welcome" class="navbar-brand">NG SNAKE</a>
   <div class="collapse navbar-collapse justify-content-end" id="navbarText">
     <ul class="navbar-nav mr-auto gap-5" id="statistics">
       <li *ngIf="scoreVisibility$ | async" class="nav-item active">
-        <span class="nav-link"
+        <span class="nav-link2"
           >Time: <span>{{ timer$ | async }}</span></span
         >
       </li>
       <li *ngIf="scoreVisibility$ | async" class="nav-item">
-        <span class="nav-link"
+        <span class="nav-link2"
           >Score: <span>{{ score$ | async }}</span></span
         >
       </li>
       <li *ngIf="scoreVisibility$ | async" class="nav-item">
-        <span class="nav-link"
+        <span class="nav-link2"
           >Game Status: <span>{{ gameStatus$ | async }}</span></span
         >
       </li>

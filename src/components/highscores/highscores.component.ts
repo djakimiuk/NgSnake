@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HighscoresService } from '../../app/services/highscores.service';
 import { Subscription } from 'rxjs';
 import { Scores } from '../../app/interfaces/scores.interface';
+import { Location } from '@angular/common';
+import { GameInfoService } from 'src/app/services/game-info.service';
 @Component({
   selector: 'app-highscores',
   templateUrl: './highscores.component.html',
@@ -13,7 +15,16 @@ export class HighscoresComponent implements OnInit {
   public errorMessage: string = '';
   public filterDirectionValue: string = 'desc';
   public filterActionValue: string = 'all';
-  constructor(private _highscoresService: HighscoresService) {}
+
+  public onBackPressed(): void {
+    this._location.back();
+    this._gameInfoService.setStatus('READY')
+  }
+  constructor(
+    private _highscoresService: HighscoresService,
+    private _gameInfoService: GameInfoService,
+    private _location: Location
+  ) {}
 
   ngOnInit(): void {
     this.sub = this._highscoresService.load().subscribe({
