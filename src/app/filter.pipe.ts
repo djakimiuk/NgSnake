@@ -11,11 +11,6 @@ export class FilterPipe implements PipeTransform {
     if (filterBy === 'all') {
       return value;
     }
-    return value.filter((el) => {
-      if (el.action === filterBy) {
-        return true;
-      }
-      return false;
-    });
+    return value.filter((el) => el.action === filterBy);
   }
 }

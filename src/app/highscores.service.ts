@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Scores } from './highscores/highscores.component';
+import { Scores } from './interfaces/scores.interface';
 import { Observable, Subscription, tap } from 'rxjs';
 import { PlayerInfoService } from './player-info.service';
 import { GameInfoService } from './game-info.service';
@@ -27,9 +27,7 @@ export class HighscoresService {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     });
-    return this._http
-      .get<Scores[]>(this.getURL, { headers: headers })
-      .pipe(tap((data) => console.log('All scores', data)));
+    return this._http.get<Scores[]>(this.getURL, { headers: headers });
   }
 
   public postScore() {

@@ -16,6 +16,7 @@ import { HighscoresComponent } from './highscores/highscores.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FilterPlayersPipe } from './filter-players.pipe';
 import { SortPlayersPipe } from './sort-players.pipe';
+import { MyscoresComponent } from './myscores/myscores.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { SortPlayersPipe } from './sort-players.pipe';
     HighscoresComponent,
     FilterPlayersPipe,
     SortPlayersPipe,
+    MyscoresComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +42,7 @@ import { SortPlayersPipe } from './sort-players.pipe';
       { path: 'game/:color', component: SnakeComponent },
       { path: 'history', component: HistoryComponent },
       { path: 'scores', component: HighscoresComponent },
+      {path: 'myscores', component: MyscoresComponent},
       { path: '**', component: FormComponent },
       { path: '', component: FormComponent },
     ]),

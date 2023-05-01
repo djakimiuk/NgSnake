@@ -161,6 +161,10 @@ export class SnakeComponent implements OnInit {
     }
   }
 
+  public onMyScoresPressed() {
+    this._router.navigate(['/myscores']);
+  }
+
   constructor(
     private _router: Router,
     private _playerInfoService: PlayerInfoService,

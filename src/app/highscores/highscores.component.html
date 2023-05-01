@@ -6,7 +6,6 @@
   <span>Filter by: </span>
   <select [(ngModel)]="filterActionValue">
     <option value="all">All</option>
-    <option value="my-scores">My scores</option>
     <option *ngFor="let score of allScores" [value]="score.name">
       {{ score.name }}
     </option>
@@ -30,7 +29,7 @@
     <tr
       *ngFor="
         let score of allScores
-          | filterPlayers : filterActionValue : playerName
+          | filterPlayers : filterActionValue
           | sortPlayers : filterDirectionValue;
         let i = index
       "
