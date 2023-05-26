@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HighscoresService } from '../../app/services/highscores.service';
-import { Subscription } from 'rxjs';
+import { Subscription, switchMap, timer } from 'rxjs';
 import { Scores } from '../../app/interfaces/scores.interface';
 import { Location } from '@angular/common';
 import { GameInfoService } from 'src/app/services/game-info.service';
@@ -18,7 +18,7 @@ export class HighscoresComponent implements OnInit {
 
   public onBackPressed(): void {
     this._location.back();
-    this._gameInfoService.setStatus('READY')
+    this._gameInfoService.setStatus('READY');
   }
   constructor(
     private _highscoresService: HighscoresService,
@@ -27,12 +27,14 @@ export class HighscoresComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.sub = this._highscoresService.load().subscribe({
-      next: (scores: Array<Scores>) => {
-        this.allScores = scores;
-      },
-      error: (err) => (this.errorMessage = err),
-    });
+    this.sub = timer(0, 30000)
+      .pipe(switchMap(() => this._highscoresService.load()))
+      .subscribe({
+        next: (scores: Array<Scores>) => {
+          this.allScores = scores;
+        },
+        error: (err) => (this.errorMessage = err),
+      });
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
