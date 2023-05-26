@@ -181,4 +181,8 @@ export class SnakeComponent implements OnInit {
     this.currentPlayer = playerData.name;
     this.url = this._router.url;
   }
+
+  ngOnDestroy() {
+    this._gameInfoService.resetTimer();
+  }
 }
