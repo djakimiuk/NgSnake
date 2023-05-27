@@ -14,15 +14,18 @@ export class NavbarComponent implements OnInit {
   public score$ = this._gameInfoService.score$;
   public timer$ = this._gameInfoService.timerValue$;
   public gameStatus$ = this._gameInfoService.gameStatus$;
+  public exitGame() {
+    this._gameInfoService.resetTimer();
+    this._gameInfoService.setStatus('READY');
+    this._playerInfoService.markFormAsSubmitted();
+  }
 
   constructor(
     private _playerInfoService: PlayerInfoService,
     private _gameInfoService: GameInfoService
   ) {}
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
   ngOnDestroy() {
     this._gameInfoService.resetTimer();
   }

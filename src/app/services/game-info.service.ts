@@ -36,7 +36,7 @@ export class GameInfoService {
   }
 
   public resetTimer() {
-    this._timerSubcription.unsubscribe();
+    this._timer !== 0 ? this._timerSubcription.unsubscribe() : null;
     this._timer = 0;
     this.timerValue$.next(this._timer);
   }
