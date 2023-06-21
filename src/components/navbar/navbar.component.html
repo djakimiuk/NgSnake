@@ -1,8 +1,6 @@
 <nav class="navbar navbar-expand-lg">
   <span class="fa-solid fa-terminal" aria-hidden="true"></span>
-  <a routerLink="/welcome" class="navbar-brand" (click)="exitGame()"
-    >NG SNAKE</a
-  >
+  <span routerLink="/welcome" class="navbar-brand">NG SNAKE</span>
   <div class="collapse navbar-collapse justify-content-end" id="navbarText">
     <ul class="navbar-nav mr-auto gap-5" id="statistics">
       <li *ngIf="scoreVisibility$ | async" class="nav-item active">
