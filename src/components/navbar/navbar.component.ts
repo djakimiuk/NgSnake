@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
   public gameStatus$ = this._gameInfoService.gameStatus$;
   public exitGame() {
     this._gameInfoService.resetTimer();
+    this._gameInfoService.scoreReset();
     this._gameInfoService.setStatus('READY');
     this._playerInfoService.markFormAsSubmitted();
   }

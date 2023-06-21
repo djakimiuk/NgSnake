@@ -68,7 +68,9 @@ export class SnakeComponent implements OnInit {
       this._snake.actionReset();
     }
     this._router.navigate(['/welcome']);
+    this._gameInfoService.scoreReset();
     this._playerInfoService.clearPlayerData();
+    this._gameInfoService.setStatus('READY');
     this._playerInfoService.markFormAsSubmitted();
   }
   public gameHistory() {
